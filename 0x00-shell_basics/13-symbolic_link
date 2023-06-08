@@ -1,2 +1,2 @@
 #!/bin/bash
-ln /bin/ls __ls__
+ln -s "$(readlink -e "$/bin/ls") "$__ls__"
