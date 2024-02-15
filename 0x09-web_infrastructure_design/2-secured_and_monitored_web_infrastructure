@@ -1,0 +1,76 @@
+User Access Scenario:
+
+    User Request:
+        A user wants to access the website www.foobar.com securely.
+
+Infrastructure Components:
+
+    Server 1 (Web Server):
+        Hosts Nginx, handles HTTP and redirects to HTTPS.
+        Serves static content and encrypts traffic using SSL.
+
+    Server 2 (Application Server):
+        Executes dynamic code of the website.
+        Collaborates with the web server to process dynamic content.
+
+    Server 3 (Database):
+        MySQL database server, part of a Primary-Replica cluster for scalability and redundancy.
+
+    Firewalls (3):
+        Placed between servers and the internet, control incoming and outgoing traffic.
+        Enhance security by filtering and monitoring network traffic.
+
+    Load Balancer (HAProxy):
+        Distributes traffic among servers for load balancing.
+        Terminates SSL, reducing the load on individual servers and providing a centralized point for SSL termination.
+
+    SSL Certificate:
+        Enables HTTPS to encrypt traffic between users and the website.
+        Boosts security by preventing eavesdropping and data tampering.
+
+    Monitoring Clients (3):
+        Data collectors for monitoring services like Sumo Logic.
+        Collect metrics, logs, and performance data for analysis.
+
+Specifics of the Infrastructure:
+
+    Additional Elements:
+        Firewalls: Added for enhanced security. They filter and monitor incoming and outgoing traffic, protecting the infrastructure from unauthorized access and potential threats.
+        SSL Certificate: Implemented to enable HTTPS, ensuring secure communication between users and the website.
+        Monitoring Clients: Deployed to collect and analyze data for proactive issue detection and performance optimization.
+
+    Firewalls:
+        Control and monitor incoming and outgoing traffic.
+        Help prevent unauthorized access, protect against malicious activities, and ensure network security.
+
+    HTTPS Traffic:
+        Why: Encrypts data during transmission, protecting sensitive user information from eavesdropping and tampering.
+        SSL Termination at Load Balancer: Reduces the processing load on individual servers, centralizing SSL termination for improved efficiency.
+
+    Monitoring:
+        Purpose: Proactively identify performance issues, security threats, and potential failures.
+        Data Collection: Monitoring clients collect metrics, logs, and other relevant data from servers and services, providing insights for optimization and troubleshooting.
+
+    Monitoring Tool Data Collection (e.g., Sumo Logic):
+        Metrics: Collects performance metrics such as CPU usage, memory utilization, and response times.
+        Logs: Gathers logs for analysis, aiding in the identification of issues and security incidents.
+
+    Monitoring Web Server QPS:
+        Steps:
+            Configure monitoring tool to collect metrics related to the web server's request per second (QPS).
+            Analyze QPS metrics to identify patterns, spikes, or anomalies.
+            Adjust server resources or scale horizontally if needed to handle increased QPS.
+
+Issues with the Infrastructure:
+
+    Terminating SSL at the Load Balancer Level:
+        Issue: While it offloads SSL processing, it can expose decrypted traffic within the internal network.
+        Solution: Implement end-to-end encryption by using SSL/TLS between the load balancer and the web server.
+
+    Single MySQL Server Accepting Writes:
+        Issue: If the single MySQL server fails, it leads to a write availability issue.
+        Solution: Implement a Primary-Replica cluster with multiple MySQL servers capable of accepting writes to enhance reliability and availability.
+
+    Identical Components on Servers:
+        Issue: Uniformity in components may lead to a single point of failure if a common component fails.
+        Solution: Introduce diversity, redundancy, or load balancing in critical components such as web servers, application servers, and databases to mitigate risks associated with failures.

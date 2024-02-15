@@ -1,2 +1,1 @@
-# Shell permissions
-_____
+echo "readme file"

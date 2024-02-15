@@ -1,0 +1,73 @@
+# Web Infrastructure Design: Single Server with LAMP Stack
+### User Access Scenario:
+
+    User Request:
+        A user wants to access the website www.foobar.com.
+
+### Infrastructure Components:
+
+    * Server (8.8.8.8):
+        A physical or virtual machine that hosts the entire web infrastructure.
+
+   *  Domain Name:
+        Domain: foobar.com
+        DNS Record: www.foobar.com points to the server IP (8.8.8.8)
+
+   * Web Server (Nginx):
+        Responsible for handling HTTP requests and serving static content.
+        Listens for incoming requests on port 80 (HTTP) and 443 (HTTPS).
+
+   * Application Server:
+        Executes the dynamic code of the website.
+        Interacts with the web server to process dynamic content.
+
+   * Application Files (Code Base):
+        Contains the website's code, including HTML, CSS, and dynamic server-side code.
+
+   * Database (MySQL):
+        Stores and retrieves data for the website.
+        Application server communicates with the database for dynamic content.
+
+### Specifics of the Infrastructure:
+
+   * Server:
+        A physical or virtual machine responsible for hosting the entire web infrastructure.
+        It stores the application files, hosts the web server, and manages the database.
+
+   * Domain Name:
+        Acts as a human-readable alias for the server's IP address (8.8.8.8).
+        Users access the website using www.foobar.com instead of the server's IP.
+
+   * DNS Record (www):
+        A CNAME (Canonical Name) record that specifies www.foobar.com as an alias for foobar.com.
+        It points to the server's IP, allowing users to reach the website using www.foobar.com.
+
+   * Web Server:
+        Nginx handles HTTP requests, serves static files, and manages connections.
+        Acts as the initial point of contact for users accessing the website.
+
+   * Application Server:
+        Executes dynamic code, communicates with the database, and generates dynamic content.
+        Collaborates with the web server to deliver a complete web page to the user.
+
+   * Database:
+        MySQL stores and retrieves data used by the website.
+        The application server interacts with the database to provide dynamic content.
+
+   * Communication:
+        Communication with the user's computer is via HTTP or HTTPS.
+        The web server responds to user requests and collaborates with the application server to generate dynamic content.
+
+### Issues with the Infrastructure:
+
+   * Single Point of Failure (SPOF):
+        The entire infrastructure relies on a single server. If it fails, the website becomes inaccessible.
+        Redundancy measures such as load balancing or failover mechanisms are needed to mitigate this risk.
+
+   * Downtime During Maintenance:
+        Deploying new code may require restarting the web server, causing temporary downtime.
+        Implementing a rolling deployment strategy or utilizing a redundant server can minimize downtime.
+
+   * Scaling Challenges:
+        The infrastructure may struggle to handle a significant increase in incoming traffic.
+        Implementing load balancing and considering vertical or horizontal scaling strategies can address scalability concerns.

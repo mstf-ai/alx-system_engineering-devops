@@ -1,2 +1,1 @@
-# the README file 
-______
+Shell, init files, variables and expansions

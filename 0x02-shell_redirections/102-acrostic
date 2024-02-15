@@ -1,9 +1,2 @@
 #!/bin/bash
-count=0
-while read -r line && [ $count -lt 2 ]; do
-  first_char=$(echo "$line" | cut -c1)
-  printf "%s" "$first_char"
-  ((count++))
-done
-printf "\n"
-
+cut -c 1 | paste -s -d ''

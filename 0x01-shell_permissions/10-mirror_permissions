@@ -1,2 +1,2 @@
 #!/bin/bash
-10-mirror_permissions
+sudo chmod --reference=olleh hello 
